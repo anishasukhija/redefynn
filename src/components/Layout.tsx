@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import redefynnLogo from '@/assets/redefynn-logo-r-dark.png';
+import redefynnLogo from '@/assets/redefynn-logo-final-dark.png';
 
 interface LayoutProps {
   children: React.ReactNode;
