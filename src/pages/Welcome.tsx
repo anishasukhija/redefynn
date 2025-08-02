@@ -8,7 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { UserCheck, Lock } from 'lucide-react';
 import Layout from '@/components/Layout';
 import { useAuth } from '@/hooks/useAuth';
-import redefynnLogo from '@/assets/redefynn-logo-f-correct.png';
+import redefynnLogo from '@/assets/redefynn-logo-r-dark.png';
 
 
 const Welcome = () => {
