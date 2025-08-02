@@ -2,6 +2,12 @@ import { useState, useEffect } from 'react'
 import { supabase } from '@/integrations/supabase/client'
 import { useAuth } from '@/hooks/useAuth'
 import { useToast } from '@/hooks/use-toast'
+import { 
+  validateApplicationData, 
+  sanitizeInput, 
+  getSecureErrorMessage,
+  logSecurityEvent 
+} from '@/lib/security'
 
 export interface ApplicationData {
   id?: string
@@ -42,9 +48,15 @@ export const useApplications = () => {
 
       setApplications(data || [])
     } catch (error: any) {
+      logSecurityEvent('applications_fetch_failed', { 
+        user_id: user.id, 
+        is_admin: isAdmin,
+        error: error.message 
+      })
+
       toast({
         title: "Error fetching applications",
-        description: error.message,
+        description: getSecureErrorMessage(error),
         variant: "destructive",
       })
     } finally {
@@ -64,12 +76,28 @@ export const useApplications = () => {
 
     try {
       setLoading(true)
+
+      // Validate application data
+      const validation = validateApplicationData(applicationData)
+      if (!validation.isValid) {
+        throw new Error(validation.errors.join(', '))
+      }
+
+      // Sanitize text inputs
+      const sanitizedData = {
+        name: sanitizeInput(applicationData.name),
+        age: applicationData.age,
+        address: sanitizeInput(applicationData.address),
+        annual_income: sanitizeInput(applicationData.annual_income),
+        job_description: sanitizeInput(applicationData.job_description),
+      }
+
       const { data, error } = await supabase
         .from('applications')
         .insert([
           {
             user_id: user.id,
-            ...applicationData,
+            ...sanitizedData,
             status: 'submitted',
           }
         ])
@@ -77,6 +105,11 @@ export const useApplications = () => {
         .maybeSingle()
 
       if (error) throw error
+
+      logSecurityEvent('application_submitted', { 
+        user_id: user.id, 
+        application_id: data?.id 
+      })
 
       toast({
         title: "Application Submitted!",
@@ -88,9 +121,14 @@ export const useApplications = () => {
 
       return { data, error: null }
     } catch (error: any) {
+      logSecurityEvent('application_submission_failed', { 
+        user_id: user.id, 
+        error: error.message 
+      })
+
       toast({
         title: "Submission failed",
-        description: error.message,
+        description: getSecureErrorMessage(error),
         variant: "destructive",
       })
       return { data: null, error }

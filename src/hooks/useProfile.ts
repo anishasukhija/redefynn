@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { supabase } from '@/integrations/supabase/client'
 import { useAuth } from '@/hooks/useAuth'
 import { useToast } from '@/hooks/use-toast'
+import { getSecureErrorMessage, logSecurityEvent } from '@/lib/security'
 
 export interface Profile {
   id: string
@@ -33,9 +34,14 @@ export const useProfile = () => {
 
       setProfile(data)
     } catch (error: any) {
+      logSecurityEvent('profile_fetch_failed', { 
+        user_id: user.id, 
+        error: error.message 
+      })
+
       toast({
         title: "Error fetching profile",
-        description: error.message,
+        description: getSecureErrorMessage(error),
         variant: "destructive",
       })
     } finally {
