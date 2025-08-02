@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,14 +8,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { ArrowLeft, Send, User, MapPin, DollarSign, Briefcase } from 'lucide-react';
 import Layout from '@/components/Layout';
 import { useToast } from '@/hooks/use-toast';
-import { useAuth } from '@/hooks/useAuth';
-import { useApplications } from '@/hooks/useApplications';
 
 const GetStarted = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { user } = useAuth();
-  const { submitApplication, loading } = useApplications();
   const [formData, setFormData] = useState({
     name: '',
     age: '',
@@ -24,28 +20,13 @@ const GetStarted = () => {
     jobDescription: ''
   });
 
-  // Redirect if not authenticated
-  useEffect(() => {
-    if (!user) {
-      navigate('/');
-    }
-  }, [user, navigate]);
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!user) return;
-
-    const { data } = await submitApplication({
-      name: formData.name,
-      age: parseInt(formData.age),
-      address: formData.address,
-      annual_income: parseInt(formData.annualIncome.replace(/[^0-9]/g, '')),
-      job_description: formData.jobDescription,
-    }, user.id);
-
-    if (data) {
-      setTimeout(() => navigate('/launch'), 2000);
-    }
+    toast({
+      title: "Application Submitted!",
+      description: "Thank you for your interest. We'll be in touch within 48 hours.",
+    });
+    setTimeout(() => navigate('/launch'), 2000);
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -202,9 +183,8 @@ const GetStarted = () => {
                       <Button
                         type="submit"
                         className="btn-hero group flex-1 pulse-glow"
-                        disabled={loading}
                       >
-                        {loading ? 'Submitting...' : 'Submit Application'}
+                        Submit Application
                         <Send className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                       </Button>
                     </div>
