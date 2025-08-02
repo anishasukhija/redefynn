@@ -170,7 +170,7 @@ const Welcome = () => {
             <p className="text-sm text-muted-foreground">
               New to dental practice financing?{' '}
               <button 
-                onClick={() => navigate('/launch')} 
+                onClick={() => navigate('/')} 
                 className="text-primary hover:text-primary-glow transition-colors underline"
               >
                 Learn more about our solutions

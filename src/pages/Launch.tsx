@@ -45,7 +45,7 @@ const Launch = () => {
 
               <div className="flex flex-col sm:flex-row gap-4 fade-in" style={{ animationDelay: '0.6s' }}>
                 <Button 
-                  onClick={() => navigate('/get-started')} 
+                  onClick={() => navigate('/welcome')} 
                   className="btn-hero group text-lg px-8 py-6"
                 >
                   Get Started
@@ -53,7 +53,7 @@ const Launch = () => {
                 </Button>
                 
                 <Button 
-                  onClick={() => navigate('/learn-more')} 
+                  onClick={() => navigate('/welcome')} 
                   className="btn-outline text-lg px-8 py-6 group"
                 >
                   <Play className="mr-2 w-5 h-5 group-hover:scale-110 transition-transform" />
