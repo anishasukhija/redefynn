@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { supabase } from '@/lib/supabase'
+import { supabase } from '@/integrations/supabase/client'
 import { useAuth } from '@/hooks/useAuth'
 import { useToast } from '@/hooks/use-toast'
 
@@ -21,16 +21,22 @@ export const useApplications = () => {
   const { user } = useAuth()
   const { toast } = useToast()
 
-  const fetchApplications = async () => {
+  const fetchApplications = async (isAdmin = false) => {
     if (!user) return
 
     try {
       setLoading(true)
-      const { data, error } = await supabase
+      let query = supabase
         .from('applications')
         .select('*')
-        .eq('user_id', user.id)
         .order('created_at', { ascending: false })
+
+      // If not admin, only show user's own applications
+      if (!isAdmin) {
+        query = query.eq('user_id', user.id)
+      }
+
+      const { data, error } = await query
 
       if (error) throw error
 
@@ -68,7 +74,7 @@ export const useApplications = () => {
           }
         ])
         .select()
-        .single()
+        .maybeSingle()
 
       if (error) throw error
 
