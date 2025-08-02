@@ -12,7 +12,7 @@ import { useApplications } from '@/hooks/useApplications';
 
 const GetStarted = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const { submitApplication, loading } = useApplications();
   const [formData, setFormData] = useState({
     name: '',
@@ -22,12 +22,12 @@ const GetStarted = () => {
     jobDescription: ''
   });
 
-  // Redirect if not logged in
+  // Redirect if not logged in (but wait for auth to load)
   useEffect(() => {
-    if (user === null) {
+    if (!authLoading && !user) {
       navigate('/');
     }
-  }, [user, navigate]);
+  }, [user, authLoading, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,6 +47,20 @@ const GetStarted = () => {
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
+
+  // Show loading while auth is being checked
+  if (authLoading) {
+    return (
+      <Layout>
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+            <p className="text-muted-foreground">Loading...</p>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
