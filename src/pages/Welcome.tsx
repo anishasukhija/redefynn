@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -7,20 +7,38 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Stethoscope, UserCheck, Lock } from 'lucide-react';
 import Layout from '@/components/Layout';
+import { useAuth } from '@/hooks/useAuth';
 
 const Welcome = () => {
   const navigate = useNavigate();
+  const { user, signIn, signUp, loading } = useAuth();
   const [loginData, setLoginData] = useState({ email: '', password: '' });
   const [signupData, setSignupData] = useState({ email: '', password: '', confirmPassword: '' });
 
-  const handleLogin = (e: React.FormEvent) => {
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (user) {
+      navigate('/launch');
+    }
+  }, [user, navigate]);
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    navigate('/launch');
+    const { data } = await signIn(loginData.email, loginData.password);
+    if (data?.user) {
+      navigate('/launch');
+    }
   };
 
-  const handleSignup = (e: React.FormEvent) => {
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    navigate('/launch');
+    if (signupData.password !== signupData.confirmPassword) {
+      return;
+    }
+    const { data } = await signUp(signupData.email, signupData.password);
+    if (data?.user) {
+      navigate('/launch');
+    }
   };
 
   return (
@@ -83,8 +101,8 @@ const Welcome = () => {
                         className="transition-all duration-300 focus:shadow-elegant"
                       />
                     </div>
-                    <Button type="submit" className="w-full btn-hero pulse-glow mt-6">
-                      Continue to Dashboard
+                    <Button type="submit" className="w-full btn-hero pulse-glow mt-6" disabled={loading}>
+                      {loading ? 'Signing In...' : 'Continue to Dashboard'}
                     </Button>
                   </form>
                 </TabsContent>
@@ -127,8 +145,8 @@ const Welcome = () => {
                         className="transition-all duration-300 focus:shadow-elegant"
                       />
                     </div>
-                    <Button type="submit" className="w-full btn-hero pulse-glow mt-6">
-                      Start Your Journey
+                    <Button type="submit" className="w-full btn-hero pulse-glow mt-6" disabled={loading}>
+                      {loading ? 'Creating Account...' : 'Start Your Journey'}
                     </Button>
                   </form>
                 </TabsContent>
