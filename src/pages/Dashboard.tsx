@@ -14,9 +14,16 @@ import { useProfile } from '@/hooks/useProfile';
 const Dashboard = () => {
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
-  const { applications, loading: applicationsLoading } = useApplications();
-  const { stats, loading: statsLoading } = useApplicationStats();
   const { isAdmin, loading: profileLoading } = useProfile();
+  const { applications, loading: applicationsLoading, fetchApplications } = useApplications();
+  const { stats, loading: statsLoading } = useApplicationStats();
+
+  // Fetch applications based on admin status
+  React.useEffect(() => {
+    if (user && !profileLoading) {
+      fetchApplications(isAdmin);
+    }
+  }, [user, isAdmin, profileLoading, fetchApplications]);
 
   const handleSignOut = async () => {
     await signOut();
