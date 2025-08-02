@@ -8,7 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { UserCheck, Lock } from 'lucide-react';
 import Layout from '@/components/Layout';
 import { useAuth } from '@/hooks/useAuth';
-import redefynnLogo from '@/assets/redefynn-logo-minimal.png';
+import redefynnLogo from '@/assets/redefynn-logo-dark.png';
 
 const Welcome = () => {
   const navigate = useNavigate();
@@ -54,7 +54,7 @@ const Welcome = () => {
                 <img 
                   src={redefynnLogo} 
                   alt="Redefynn Logo" 
-                  className="w-32 h-32 mx-auto object-contain filter drop-shadow-2xl hover:scale-110 transition-all duration-300"
+                  className="w-40 h-40 mx-auto object-contain filter drop-shadow-2xl hover:scale-110 transition-all duration-300"
                 />
               </div>
             </div>

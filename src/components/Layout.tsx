@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import redefynnLogo from '@/assets/redefynn-logo-minimal.png';
+import redefynnLogo from '@/assets/redefynn-logo-dark.png';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -29,7 +29,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                     <img 
                       src={redefynnLogo} 
                       alt="Redefynn Logo" 
-                      className="w-12 h-12 object-contain filter drop-shadow-lg"
+                      className="w-16 h-16 object-contain filter drop-shadow-lg"
                     />
                   </div>
                 </div>
@@ -79,7 +79,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <img 
                   src={redefynnLogo} 
                   alt="Redefynn Logo" 
-                  className="w-10 h-10 object-contain filter drop-shadow-lg"
+                  className="w-12 h-12 object-contain filter drop-shadow-lg"
                 />
               </div>
             </div>
