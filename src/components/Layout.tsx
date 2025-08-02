@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import redefynnLogo from '@/assets/redefynn-logo-new.png';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -26,7 +27,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                   <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-accent/30 rounded-xl blur-lg opacity-80 group-hover:opacity-100 transition-all duration-300"></div>
                   <div className="relative bg-gradient-to-br from-background via-card to-background rounded-xl p-3 shadow-elegant border border-border/50">
                     <img 
-                      src="/lovable-uploads/b28c50a3-dfbb-407c-81bf-a8f3cc1b527f.png" 
+                      src={redefynnLogo} 
                       alt="Redefynn Logo" 
                       className="w-20 h-20 object-contain filter drop-shadow-lg"
                     />
@@ -76,7 +77,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-xl blur-lg opacity-60"></div>
               <div className="relative bg-gradient-to-br from-background via-card to-background rounded-xl p-3 shadow-elegant border border-border/30">
                 <img 
-                  src="/lovable-uploads/b28c50a3-dfbb-407c-81bf-a8f3cc1b527f.png" 
+                  src={redefynnLogo} 
                   alt="Redefynn Logo" 
                   className="w-14 h-14 object-contain filter drop-shadow-lg"
                 />

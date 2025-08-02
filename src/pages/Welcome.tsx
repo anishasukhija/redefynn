@@ -8,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { UserCheck, Lock } from 'lucide-react';
 import Layout from '@/components/Layout';
 import { useAuth } from '@/hooks/useAuth';
+import redefynnLogo from '@/assets/redefynn-logo-new.png';
 
 
 const Welcome = () => {
@@ -52,7 +53,7 @@ const Welcome = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-primary/30 via-accent/30 to-primary/30 rounded-full blur-2xl opacity-80 group-hover:opacity-100 transition-all duration-500 animate-pulse"></div>
               <div className="relative bg-gradient-to-br from-background via-card to-background rounded-3xl p-12 shadow-elegant border border-border/50 backdrop-blur-sm">
                 <img 
-                  src="/lovable-uploads/b28c50a3-dfbb-407c-81bf-a8f3cc1b527f.png" 
+                  src={redefynnLogo} 
                   alt="Redefynn Logo" 
                   className="w-48 h-48 mx-auto object-contain filter drop-shadow-2xl hover:scale-110 transition-all duration-300"
                 />
