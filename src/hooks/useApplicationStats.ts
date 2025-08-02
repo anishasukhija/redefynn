@@ -22,14 +22,12 @@ export const useApplicationStats = () => {
 
     try {
       setLoading(true)
-      const { data, error } = await supabase
-        .from('application_stats')
-        .select('*')
-        .order('month_year', { ascending: false })
+      const { data, error } = await (supabase as any)
+        .rpc('get_application_stats')
 
       if (error) throw error
 
-      setStats(data || [])
+      setStats((data as ApplicationStats[]) || [])
     } catch (error: any) {
       logSecurityEvent('stats_fetch_failed', { 
         user_id: user.id, 
