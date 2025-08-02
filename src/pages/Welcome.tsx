@@ -8,7 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { UserCheck, Lock } from 'lucide-react';
 import Layout from '@/components/Layout';
 import { useAuth } from '@/hooks/useAuth';
-import redefynnLogo from '@/assets/redefynn-logo.png';
+import redefynnLogo from '@/assets/redefynn-logo-v2.png';
 
 const Welcome = () => {
   const navigate = useNavigate();
