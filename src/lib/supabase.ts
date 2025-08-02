@@ -1,9 +1,17 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+// Get Supabase credentials - these should be available in Lovable's Supabase integration
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || ''
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || ''
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+// Fallback for development - you'll need to replace these with your actual Supabase credentials
+const fallbackUrl = 'https://placeholder.supabase.co'
+const fallbackKey = 'placeholder-key'
+
+export const supabase = createClient(
+  supabaseUrl || fallbackUrl, 
+  supabaseAnonKey || fallbackKey
+)
 
 export type Database = {
   public: {
