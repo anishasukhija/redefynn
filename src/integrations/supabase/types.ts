@@ -82,17 +82,18 @@ export type Database = {
       }
     }
     Views: {
-      application_stats: {
-        Row: {
-          application_count: number | null
-          city: string | null
-          month_year: string | null
-          state: string | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Functions: {
+      get_application_stats: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          state: string
+          city: string
+          application_count: number
+          month_year: string
+        }[]
+      }
       is_admin: {
         Args: { user_id: string }
         Returns: boolean
