@@ -82,7 +82,15 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      application_stats: {
+        Row: {
+          application_count: number | null
+          city: string | null
+          month_year: string | null
+          state: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       is_admin: {
