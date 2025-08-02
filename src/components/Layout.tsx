@@ -24,20 +24,20 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 className="flex items-center space-x-3 group transition-all duration-300 hover:scale-105"
               >
                 <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-xl blur-md opacity-70 group-hover:opacity-100 transition-all duration-300"></div>
-                  <div className="relative bg-gradient-to-br from-background via-card to-background rounded-xl p-2 shadow-elegant border border-border/50">
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-accent/30 rounded-xl blur-lg opacity-80 group-hover:opacity-100 transition-all duration-300"></div>
+                  <div className="relative bg-gradient-to-br from-background via-card to-background rounded-xl p-3 shadow-elegant border border-border/50">
                     <img 
                       src={redefynnLogo} 
                       alt="Redefynn Logo" 
-                      className="w-8 h-8 object-contain filter drop-shadow-sm"
+                      className="w-12 h-12 object-contain filter drop-shadow-lg"
                     />
                   </div>
                 </div>
-                <div className="hidden sm:block">
-                  <h1 className="text-xl font-serif font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+                <div className="flex flex-col">
+                  <h1 className="text-2xl font-serif font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
                     Redefynn
                   </h1>
-                  <p className="text-xs text-muted-foreground font-medium tracking-wide">P2P Funds Redefined</p>
+                  <p className="text-sm text-muted-foreground font-medium tracking-wide">P2P Funds Redefined</p>
                 </div>
               </button>
               
@@ -74,18 +74,18 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div className="container mx-auto text-center">
           <div className="flex items-center justify-center space-x-3 mb-4">
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 rounded-lg blur-sm"></div>
-              <div className="relative bg-gradient-to-br from-background via-card to-background rounded-lg p-2 shadow-elegant border border-border/30">
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-xl blur-lg opacity-60"></div>
+              <div className="relative bg-gradient-to-br from-background via-card to-background rounded-xl p-3 shadow-elegant border border-border/30">
                 <img 
                   src={redefynnLogo} 
                   alt="Redefynn Logo" 
-                  className="w-6 h-6 object-contain filter drop-shadow-sm"
+                  className="w-10 h-10 object-contain filter drop-shadow-lg"
                 />
               </div>
             </div>
             <div>
-              <h3 className="text-xl font-serif font-semibold text-primary">Redefynn</h3>
-              <p className="text-sm text-muted-foreground">P2P Funds Redefined</p>
+              <h3 className="text-2xl font-serif font-semibold text-primary">Redefynn</h3>
+              <p className="text-base text-muted-foreground">P2P Funds Redefined</p>
             </div>
           </div>
           <p className="text-sm text-muted-foreground">

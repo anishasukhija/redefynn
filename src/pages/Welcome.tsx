@@ -49,20 +49,20 @@ const Welcome = () => {
           {/* Header */}
           <div className="text-center mb-12 fade-in">
             <div className="relative mb-8 group">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 rounded-full blur-xl opacity-70 group-hover:opacity-100 transition-all duration-500 animate-pulse"></div>
-              <div className="relative bg-gradient-to-br from-background via-card to-background rounded-2xl p-8 shadow-elegant border border-border/50 backdrop-blur-sm">
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/30 via-accent/30 to-primary/30 rounded-full blur-2xl opacity-80 group-hover:opacity-100 transition-all duration-500 animate-pulse"></div>
+              <div className="relative bg-gradient-to-br from-background via-card to-background rounded-3xl p-12 shadow-elegant border border-border/50 backdrop-blur-sm">
                 <img 
                   src={redefynnLogo} 
                   alt="Redefynn Logo" 
-                  className="w-24 h-24 mx-auto object-contain filter drop-shadow-lg hover:scale-105 transition-all duration-300"
+                  className="w-32 h-32 mx-auto object-contain filter drop-shadow-2xl hover:scale-110 transition-all duration-300"
                 />
               </div>
             </div>
             <div className="space-y-2">
-              <h1 className="text-3xl font-serif font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+              <h1 className="text-4xl font-serif font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
                 Redefynn
               </h1>
-              <p className="text-lg text-muted-foreground font-medium tracking-wide">P2P Funds Redefined</p>
+              <p className="text-xl text-muted-foreground font-medium tracking-wide">P2P Funds Redefined</p>
             </div>
           </div>
 
