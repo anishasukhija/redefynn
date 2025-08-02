@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { supabase } from '@/integrations/supabase/client'
 import { useAuth } from '@/hooks/useAuth'
 import { useToast } from '@/hooks/use-toast'
@@ -27,7 +27,7 @@ export const useApplications = () => {
   const { user } = useAuth()
   const { toast } = useToast()
 
-  const fetchApplications = async (isAdmin = false) => {
+  const fetchApplications = useCallback(async (isAdmin = false) => {
     if (!user) return
 
     try {
@@ -62,7 +62,7 @@ export const useApplications = () => {
     } finally {
       setLoading(false)
     }
-  }
+  }, [user, toast])
 
   const submitApplication = async (applicationData: Omit<ApplicationData, 'id' | 'status' | 'created_at' | 'updated_at'>) => {
     if (!user) {
