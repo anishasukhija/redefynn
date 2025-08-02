@@ -5,9 +5,10 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Stethoscope, UserCheck, Lock } from 'lucide-react';
+import { UserCheck, Lock } from 'lucide-react';
 import Layout from '@/components/Layout';
 import { useAuth } from '@/hooks/useAuth';
+import redefynnLogo from '@/assets/redefynn-logo.png';
 
 const Welcome = () => {
   const navigate = useNavigate();
@@ -48,10 +49,13 @@ const Welcome = () => {
           {/* Header */}
           <div className="text-center mb-8 fade-in">
             <div className="floating mb-4">
-              <Stethoscope className="w-16 h-16 mx-auto text-primary" />
+              <img 
+                src={redefynnLogo} 
+                alt="Redefynn Logo" 
+                className="w-32 h-32 mx-auto object-contain"
+              />
             </div>
-            <h1 className="text-4xl font-serif font-bold text-primary mb-2">Redefynn</h1>
-            <p className="text-lg text-muted-foreground">Your journey to dental success begins here.</p>
+            <p className="text-lg text-muted-foreground">P2P Funds Redefined</p>
           </div>
 
           {/* Login/Signup Tabs */}
