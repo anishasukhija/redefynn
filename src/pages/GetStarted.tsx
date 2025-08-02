@@ -24,7 +24,7 @@ const GetStarted = () => {
 
   // Redirect if not logged in
   useEffect(() => {
-    if (!user) {
+    if (user === null) {
       navigate('/');
     }
   }, [user, navigate]);
