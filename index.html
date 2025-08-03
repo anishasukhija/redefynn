@@ -1,27 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Redefynn - P2P Funds Redefined for Dental Professionals</title>
-    <meta name="description" content="Revolutionary peer-to-peer financing for dental practice ownership. Fast approvals, flexible terms, and industry expertise to help you build your dream practice." />
-    <meta name="author" content="Redefynn" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redefynn - P2P Funds Redefined</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Redefynn</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#welcome" class="nav-link">Login</a></li>
+                <li><a href="#launch" class="nav-link">Home</a></li>
+                <li><a href="#learn" class="nav-link">Learn More</a></li>
+                <li><a href="#start" class="nav-link">Get Started</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
 
-    <meta property="og:title" content="Redefynn - P2P Funds Redefined for Dental Professionals" />
-    <meta property="og:description" content="Revolutionary peer-to-peer financing for dental practice ownership. Fast approvals, flexible terms, and industry expertise to help you build your dream practice." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <!-- Page 1: Welcome/Login-Signup Portal -->
+    <section id="welcome" class="page welcome-page active">
+        <div class="container">
+            <div class="login-container">
+                <div class="login-header">
+                    <div class="dental-icon">
+                        <i class="fas fa-tooth"></i>
+                    </div>
+                    <h1>Welcome to Redefynn</h1>
+                    <p class="tagline">Your journey to dental success begins here.</p>
+                </div>
+                
+                <div class="login-form-container">
+                    <div class="form-tabs">
+                        <button class="tab-btn active" data-tab="login">Login</button>
+                        <button class="tab-btn" data-tab="signup">Sign Up</button>
+                    </div>
+                    
+                    <form class="login-form" id="login-form">
+                        <div class="form-group">
+                            <input type="email" id="login-email" placeholder="Email Address" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="login-password" placeholder="Password" required>
+                        </div>
+                        <button type="submit" class="login-btn">
+                            <span>Sign In</span>
+                            <div class="btn-shimmer"></div>
+                        </button>
+                    </form>
+                    
+                    <form class="login-form hidden" id="signup-form">
+                        <div class="form-group">
+                            <input type="text" id="signup-name" placeholder="Full Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="signup-email" placeholder="Email Address" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="signup-password" placeholder="Password" required>
+                        </div>
+                        <button type="submit" class="login-btn">
+                            <span>Create Account</span>
+                            <div class="btn-shimmer"></div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-  </head>
+    <!-- Page 2: Launch Page / Product Overview -->
+    <section id="launch" class="page launch-page">
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">P2P Funds Redefined</h1>
+                    <p class="hero-subtitle">We're throwing friction out the window and accelerating your journey to your own dream dental practice.</p>
+                    <div class="hero-buttons">
+                        <button class="cta-btn primary" onclick="navigateToPage('start')">Get Started</button>
+                        <button class="cta-btn secondary" onclick="navigateToPage('learn')">Learn More</button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Modern Dental Office" />
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+    <!-- Page 3: Learn More / Product Differentiators -->
+    <section id="learn" class="page learn-page">
+        <div class="container">
+            <div class="learn-header">
+                <h2>Why Choose Redefynn?</h2>
+                <p class="learn-description">
+                    Unlike traditional lenders, we simplify access to startup capital through peer-powered funding—with faster approvals, flexible terms, and a deep understanding of the dental industry.
+                </p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Peer-to-Peer Flexibility</h3>
+                    <p>Connect directly with investors who understand your vision and offer personalized funding solutions.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tooth"></i>
+                    </div>
+                    <h3>Dental Industry Expertise</h3>
+                    <p>Our team specializes in dental practice financing with deep industry knowledge and experience.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <h3>Transparent Terms</h3>
+                    <p>No hidden fees, clear documentation, and straightforward terms you can understand and trust.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Fast Onboarding</h3>
+                    <p>Streamlined application process gets you from application to funding faster than traditional banks.</p>
+                </div>
+            </div>
+            
+            <div class="cta-section">
+                <button class="cta-btn primary large" onclick="navigateToPage('start')">Start Your Journey</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page 4: Get Started / Demographic Capture -->
+    <section id="start" class="page start-page">
+        <div class="container">
+            <div class="form-header">
+                <h2 class="typing-text" data-text="Let's build your future practice. Tell us a bit about yourself."></h2>
+            </div>
+            
+            <form class="demographic-form" id="demographic-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="full-name">Full Name</label>
+                        <input type="text" id="full-name" name="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" name="age" min="18" max="100" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <textarea id="address" name="address" rows="3" required></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="income">Annual Income</label>
+                        <select id="income" name="income" required>
+                            <option value="">Select Range</option>
+                            <option value="50k-75k">$50,000 - $75,000</option>
+                            <option value="75k-100k">$75,000 - $100,000</option>
+                            <option value="100k-150k">$100,000 - $150,000</option>
+                            <option value="150k-200k">$150,000 - $200,000</option>
+                            <option value="200k+">$200,000+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="job-title">Current Position</label>
+                        <input type="text" id="job-title" name="jobTitle" placeholder="e.g., Associate Dentist" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="job-description">Tell us about your dental career</label>
+                    <textarea id="job-description" name="jobDescription" rows="4" placeholder="Describe your experience, specializations, and practice goals..." required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    <span>Submit Application</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Redefynn</h3>
+                    <p>P2P Funds Redefined</p>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-envelope"></i> redefynnhq@gmail.com</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#launch">Home</a></li>
+                        <li><a href="#learn">Learn More</a></li>
+                        <li><a href="#start">Get Started</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Redefynn. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
 </html>
