@@ -1,4 +1,6 @@
 // Security utilities for input validation and sanitization
+import DOMPurify from 'dompurify';
+import { SECURITY_CONFIG } from './security-config';
 
 // Email validation with security considerations
 export const validateEmail = (email: string): { isValid: boolean; error?: string } => {
@@ -9,13 +11,25 @@ export const validateEmail = (email: string): { isValid: boolean; error?: string
   const trimmedEmail = email.trim()
   
   // Check length to prevent potential DoS
-  if (trimmedEmail.length > 254) {
+  if (trimmedEmail.length > SECURITY_CONFIG.INPUT_LIMITS.EMAIL_MAX_LENGTH) {
     return { isValid: false, error: 'Email address too long' }
   }
 
   // Basic email regex validation
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   if (!emailRegex.test(trimmedEmail)) {
+    return { isValid: false, error: 'Invalid email format' }
+  }
+
+  // Check for common malicious patterns
+  const maliciousPatterns = [
+    /<script/i,
+    /javascript:/i,
+    /on\w+=/i,
+    /data:text\/html/i
+  ]
+  
+  if (maliciousPatterns.some(pattern => pattern.test(trimmedEmail))) {
     return { isValid: false, error: 'Invalid email format' }
   }
 
@@ -41,18 +55,52 @@ export const validatePassword = (password: string): { isValid: boolean; error?: 
     return { isValid: false, error: 'Password must contain at least one letter and one number' }
   }
 
+  // Check for at least one special character (enhanced security)
+  if (!/(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/.test(password)) {
+    return { isValid: false, error: 'Password must contain at least one special character' }
+  }
+
+  // Check for common weak passwords
+  const commonPasswords = [
+    'password', '12345678', 'qwerty', 'abc123', 'password123',
+    'admin', 'letmein', 'welcome', 'monkey', '1234567890'
+  ]
+  
+  if (commonPasswords.some(weak => password.toLowerCase().includes(weak))) {
+    return { isValid: false, error: 'Password is too common. Please choose a stronger password' }
+  }
+
   return { isValid: true }
 }
 
-// Sanitize input to prevent XSS
+// Enhanced sanitize input to prevent XSS using DOMPurify
 export const sanitizeInput = (input: string): string => {
   if (!input || typeof input !== 'string') return ''
   
-  return input
-    .trim()
-    .replace(/[<>]/g, '') // Remove angle brackets
-    .replace(/javascript:/gi, '') // Remove javascript: protocol
-    .replace(/on\w+=/gi, '') // Remove event handlers
+  // Use DOMPurify for robust XSS protection
+  const cleaned = DOMPurify.sanitize(input, {
+    ALLOWED_TAGS: [], // No HTML tags allowed
+    ALLOWED_ATTR: []  // No attributes allowed
+  });
+  
+  return cleaned.substring(0, SECURITY_CONFIG.INPUT_LIMITS.GENERAL_TEXT_MAX_LENGTH);
+}
+
+// Enhanced HTML sanitization for rich text using DOMPurify
+export const sanitizeHtml = (html: string): string => {
+  if (!html || typeof html !== 'string') {
+    return ''
+  }
+
+  // Allow basic formatting tags but strip dangerous ones
+  const cleaned = DOMPurify.sanitize(html, {
+    ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 'ol', 'ul', 'li'],
+    ALLOWED_ATTR: [],
+    FORBID_TAGS: ['script', 'object', 'embed', 'link', 'style', 'meta', 'iframe'],
+    FORBID_ATTR: ['onclick', 'onload', 'onerror', 'onmouseover']
+  });
+  
+  return cleaned.substring(0, SECURITY_CONFIG.INPUT_LIMITS.HTML_CONTENT_MAX_LENGTH);
 }
 
 // Validate application data

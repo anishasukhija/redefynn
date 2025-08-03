@@ -9,6 +9,7 @@ import {
   getSecureErrorMessage,
   logSecurityEvent 
 } from '@/lib/security'
+import { SECURITY_CONFIG } from '@/lib/security-config'
 
 export const useAuth = () => {
   const [user, setUser] = useState<User | null>(null)
@@ -53,7 +54,7 @@ export const useAuth = () => {
 
       // Rate limiting
       const rateLimitKey = `signup_${email.toLowerCase()}`
-      if (!authRateLimiter.isAllowed(rateLimitKey, 3, 15 * 60 * 1000)) { // 3 attempts per 15 minutes
+      if (!authRateLimiter.isAllowed(rateLimitKey, SECURITY_CONFIG.RATE_LIMITS.AUTH.SIGNUP_ATTEMPTS, SECURITY_CONFIG.RATE_LIMITS.AUTH.SIGNUP_WINDOW)) {
         const remainingTime = Math.ceil(authRateLimiter.getRemainingTime(rateLimitKey) / 60000)
         throw new Error(`Too many signup attempts. Please wait ${remainingTime} minutes before trying again.`)
       }
@@ -68,7 +69,7 @@ export const useAuth = () => {
 
       if (error) throw error
 
-      logSecurityEvent('user_signup_attempt', { email: email.toLowerCase().trim(), success: true })
+      logSecurityEvent(SECURITY_CONFIG.SECURITY_EVENTS.USER_SIGNUP, { email: email.toLowerCase().trim(), success: true })
 
       if (data?.user && !data?.user?.email_confirmed_at) {
         toast({

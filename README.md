@@ -1,73 +1,64 @@
-# Welcome to your Lovable project
+# Redefynn - P2P Funds Redefined for Dental Professionals
 
-## Project info
+![Redefynn Logo](./src/assets/redefynn-logo-final.png)
 
-**URL**: https://lovable.dev/projects/90936a38-8b54-456c-9f6b-26b608d7e0d1
+## About Redefynn
 
-## How can I edit this code?
+Redefynn is a revolutionary peer-to-peer financing platform specifically designed for dental professionals looking to establish, expand, or upgrade their practices. We're transforming the traditional dental practice financing landscape by connecting dental professionals directly with investors who understand the healthcare industry.
 
-There are several ways of editing your application.
+Our mission: **To accelerate your journey to owning your dream dental practice by removing traditional financing barriers.**
 
-**Use Lovable**
+## Key Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/90936a38-8b54-456c-9f6b-26b608d7e0d1) and start prompting.
+### 🌟 Peer-to-Peer Flexibility
+Connect directly with investors who understand healthcare, bypassing traditional banking limitations and restrictions.
 
-Changes made via Lovable will be committed automatically to this repo.
+### 🦷 Dental Industry Expertise
+Our team specializes in dental practice financing with deep knowledge of the unique needs and challenges of dental professionals.
 
-**Use your preferred IDE**
+### 👁️ Transparent Terms
+No hidden fees, clear terms, and straightforward communication throughout your financing journey.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### ⚡ Fast Onboarding & Approval
+Get approved in days, not months. Our streamlined process gets you funded quickly so you can focus on building your practice.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Why Choose Redefynn?
 
-Follow these steps:
+Unlike traditional lenders, we simplify access to startup capital through peer-powered funding with:
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- **Rapid Approvals**: 48-hour average approval time
+- **Flexible Terms**: Customized to your practice's cash flow
+- **Industry Knowledge**: Dental-specific expertise and understanding
+- **Personal Service**: Direct communication with decision makers
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## Our Impact
 
-# Step 3: Install the necessary dependencies.
-npm i
+- **500+** Practices Funded
+- **$50M+** Capital Deployed
+- **48hrs** Average Approval Time
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+## Getting Started
 
-**Edit a file directly in GitHub**
+1. **Create an Account**: Sign up on our platform
+2. **Submit Your Application**: Provide basic information about yourself and your practice goals
+3. **Receive Approval**: Get a decision within an average of 48 hours
+4. **Access Funding**: Transform your dental practice with the capital you need
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Technology Stack
 
-**Use GitHub Codespaces**
+- **Frontend**: React with TypeScript, Vite
+- **Styling**: TailwindCSS with custom UI components
+- **Backend**: Supabase (PostgreSQL, Authentication)
+- **Deployment**: [Your deployment platform]
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Contributing
 
-## What technologies are used for this project?
+This is a closed-source project. For questions or business inquiries, please contact [contact information].
 
-This project is built with:
+## Security
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Redefynn maintains bank-level security standards and is HIPAA compliant, ensuring your sensitive information is always protected.
 
-## How can I deploy this project?
+## License
 
-Simply open [Lovable](https://lovable.dev/projects/90936a38-8b54-456c-9f6b-26b608d7e0d1) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Copyright © 2025 Redefynn. All rights reserved.
