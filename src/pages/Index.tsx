@@ -5,7 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { ArrowRight, CheckCircle, DollarSign, Clock, Users, TrendingUp } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import redefynnLogo from "@/assets/redefynn-logo-final.png";
+import redefynnLogo from "@/assets/Logo.jpeg";
 
 const Index = () => {
   console.log("Index component is rendering");
