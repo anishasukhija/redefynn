@@ -44,11 +44,11 @@ Unlike traditional lenders, we simplify access to startup capital through peer-p
 - **Frontend**: React with TypeScript, Vite
 - **Styling**: TailwindCSS with custom UI components
 - **Backend**: Supabase (PostgreSQL, Authentication)
-- **Deployment**: [Your deployment platform]
+- **Deployment**: Vercel
 
 ## Contributing
 
-This is a closed-source project. For questions or business inquiries, please contact [contact information].
+This is a closed-source project. For questions or business inquiries, please contact redefynnhq@gmail.com
 
 ## Security
 
