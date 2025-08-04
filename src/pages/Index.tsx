@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import redefynnLogo from "@/assets/redefynn-logo-final.png";
 
 const Index = () => {
+  console.log("Index component is rendering");
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
