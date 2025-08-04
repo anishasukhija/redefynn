@@ -145,8 +145,8 @@ const Index = () => {
                   <Users className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-card-foreground">500+</div>
-                  <div className="text-sm text-muted-foreground">Dental Practices</div>
+                  <div className="text-2xl font-bold text-card-foreground">Launching Soon</div>
+                  <div className="text-sm text-muted-foreground">Be Among the First</div>
                 </div>
               </div>
             </div>
@@ -157,8 +157,8 @@ const Index = () => {
                   <TrendingUp className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-card-foreground">98%</div>
-                  <div className="text-sm text-muted-foreground">Success Rate</div>
+                  <div className="text-2xl font-bold text-card-foreground">Your Success%</div>
+                  <div className="text-sm text-muted-foreground">Is Our Mission</div>
                 </div>
               </div>
             </div>

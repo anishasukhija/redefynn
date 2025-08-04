@@ -64,12 +64,12 @@ const Launch = () => {
               <div className="fade-in" style={{ animationDelay: '0.9s' }}>
                 <div className="flex items-center space-x-8 text-sm text-muted-foreground">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-primary">500+</div>
-                    <div>Practices Funded</div>
+                    <div className="text-2xl font-bold text-primary">Launching Soon</div>
+                    <div>Be Among the First</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-accent">$50M+</div>
-                    <div>Capital Deployed</div>
+                    <div className="text-2xl font-bold text-accent">Your Success</div>
+                    <div>Is Our Mission</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-primary">48hrs</div>

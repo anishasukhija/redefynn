@@ -31,11 +31,6 @@ Unlike traditional lenders, we simplify access to startup capital through peer-p
 - **Industry Knowledge**: Dental-specific expertise and understanding
 - **Personal Service**: Direct communication with decision makers
 
-## Our Impact
-
-- **500+** Practices Funded
-- **$50M+** Capital Deployed
-- **48hrs** Average Approval Time
 
 ## Getting Started
 
