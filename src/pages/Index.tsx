@@ -56,22 +56,11 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
       {/* Header */}
-      <header className="px-6 py-4 flex items-center justify-between">
+      <header className="px-6 py-4 flex items-center justify-center">
         <div className="flex items-center gap-3">
           <img src={redefynnLogo} alt="Redefynn" className="h-8 w-auto" />
           <span className="text-2xl font-bold text-foreground">Redefynn</span>
         </div>
-        <nav className="hidden md:flex items-center gap-6">
-          <button 
-            onClick={() => navigate('/learn-more')}
-            className="text-muted-foreground hover:text-foreground transition-colors"
-          >
-            How It Works
-          </button>
-          <Button variant="outline" onClick={() => navigate('/get-started')}>
-            Sign In
-          </Button>
-        </nav>
       </header>
 
       {/* Hero Section */}
@@ -241,25 +230,26 @@ const Index = () => {
           <p className="text-xl opacity-90 max-w-2xl mx-auto">
             Join hundreds of dental practices that have secured funding through our platform.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <form onSubmit={handleEmailSignup} className="flex gap-3 max-w-md mx-auto">
+            <Input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="flex-1 bg-white text-foreground"
+              required
+            />
             <Button 
+              type="submit" 
+              disabled={isSubmitting}
               size="lg" 
               variant="secondary"
-              onClick={() => navigate('/get-started')}
-              className="text-primary"
+              className="text-primary px-8"
             >
-              Get Started Today
+              {isSubmitting ? "Joining..." : "Join Waitlist"}
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
-            <Button 
-              size="lg" 
-              variant="outline"
-              onClick={() => navigate('/learn-more')}
-              className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
-            >
-              Learn More
-            </Button>
-          </div>
+          </form>
         </div>
       </section>
 
