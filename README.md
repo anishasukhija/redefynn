@@ -1,6 +1,6 @@
 # Redefynn - P2P Funds Redefined for Dental Professionals
 
-![Redefynn Logo](./src/assets/redefynn-logo-final.png)
+![Redefynn Logo](./src/assets/Logo.jpeg)
 
 ## About Redefynn
 
