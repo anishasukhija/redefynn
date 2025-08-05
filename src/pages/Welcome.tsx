@@ -1,186 +1,298 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { UserCheck, Lock } from 'lucide-react';
-import Layout from '@/components/Layout';
-import { useAuth } from '@/hooks/useAuth';
-import redefynnLogo from '@/assets/Logo.jpeg';
-
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import { ArrowLeft, Mail, Lock, User } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import redefynnLogo from "@/assets/Logo.jpeg";
 
 const Welcome = () => {
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    fullName: ""
+  });
+  const { toast } = useToast();
   const navigate = useNavigate();
-  const { user, signIn, signUp, loading } = useAuth();
-  const [loginData, setLoginData] = useState({ email: '', password: '' });
-  const [signupData, setSignupData] = useState({ email: '', password: '', confirmPassword: '' });
 
-  // Redirect if already logged in
-  useEffect(() => {
-    if (user) {
-      navigate('/dashboard');
-    }
-  }, [user, navigate]);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+  };
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { data } = await signIn(loginData.email, loginData.password);
-    if (data?.user) {
-      navigate('/dashboard');
+    setIsLoading(true);
+
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          data: {
+            full_name: formData.fullName,
+          }
+        }
+      });
+
+      if (error) {
+        toast({
+          title: "Sign up failed",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Check your email!",
+          description: "We've sent you a verification link. Please click on the link in your email to complete your registration.",
+          variant: "default",
+        });
+        setFormData({ email: "", password: "", fullName: "" });
+      }
+    } catch (error) {
+      console.error('Sign up error:', error);
+      toast({
+        title: "Something went wrong",
+        description: "Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const handleSignup = async (e: React.FormEvent) => {
+  const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (signupData.password !== signupData.confirmPassword) {
-      return;
+    setIsLoading(true);
+
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: formData.email,
+        password: formData.password,
+      });
+
+      if (error) {
+        toast({
+          title: "Sign in failed",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Welcome back!",
+          description: "You have successfully signed in.",
+          variant: "default",
+        });
+        // Redirect to dashboard or home
+        navigate('/dashboard');
+      }
+    } catch (error) {
+      console.error('Sign in error:', error);
+      toast({
+        title: "Something went wrong",
+        description: "Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
     }
-    const { data } = await signUp(signupData.email, signupData.password);
-    if (data?.user) {
-      navigate('/dashboard');
+  };
+
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(formData.email, {
+        redirectTo: `${window.location.origin}/reset-password`,
+      });
+
+      if (error) {
+        toast({
+          title: "Password reset failed",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Password reset email sent!",
+          description: "Check your email for a password reset link.",
+          variant: "default",
+        });
+        setFormData({ email: "", password: "", fullName: "" });
+        setIsForgotPassword(false);
+      }
+    } catch (error) {
+      console.error('Password reset error:', error);
+      toast({
+        title: "Something went wrong",
+        description: "Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <Layout>
-      <div className="min-h-screen flex items-center justify-center p-4">
-        <div className="w-full max-w-md">
-          {/* Header */}
-          <div className="text-center mb-12 fade-in">
-            <div className="relative mb-8 group">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/30 via-accent/30 to-primary/30 rounded-full blur-2xl opacity-80 group-hover:opacity-100 transition-all duration-500 animate-pulse"></div>
-              <div className="relative bg-gradient-to-br from-background via-card to-background rounded-3xl p-12 shadow-elegant border border-border/50 backdrop-blur-sm">
-                <img 
-                  src={redefynnLogo} 
-                  alt="Redefynn Logo" 
-                  className="w-48 h-48 mx-auto object-contain filter drop-shadow-2xl hover:scale-110 transition-all duration-300"
-                />
-              </div>
-            </div>
-            <div className="space-y-2">
-              <h1 className="text-4xl font-serif font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-                Redefynn
-              </h1>
-              <p className="text-xl text-muted-foreground font-medium tracking-wide">P2P Funds Redefined</p>
-            </div>
-          </div>
-
-          {/* Login/Signup Tabs */}
-          <Card className="fade-in shadow-elegant" style={{ animationDelay: '0.3s' }}>
-            <CardHeader>
-              <CardTitle className="text-center font-serif">Welcome Back</CardTitle>
-              <CardDescription className="text-center">
-                Access your dental practice financing journey
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Tabs defaultValue="login" className="w-full">
-                <TabsList className="grid w-full grid-cols-2 mb-6">
-                  <TabsTrigger value="login" className="flex items-center gap-2">
-                    <Lock className="w-4 h-4" />
-                    Login
-                  </TabsTrigger>
-                  <TabsTrigger value="signup" className="flex items-center gap-2">
-                    <UserCheck className="w-4 h-4" />
-                    Sign Up
-                  </TabsTrigger>
-                </TabsList>
-
-                <TabsContent value="login">
-                  <form onSubmit={handleLogin} className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email</Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        placeholder="your.email@example.com"
-                        value={loginData.email}
-                        onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
-                        required
-                        className="transition-all duration-300 focus:shadow-elegant"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="password">Password</Label>
-                      <Input
-                        id="password"
-                        type="password"
-                        placeholder="••••••••"
-                        value={loginData.password}
-                        onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
-                        required
-                        className="transition-all duration-300 focus:shadow-elegant"
-                      />
-                    </div>
-                    <Button type="submit" disabled={loading} className="w-full btn-hero pulse-glow mt-6">
-                      {loading ? 'Signing in...' : 'Continue to Dashboard'}
-                    </Button>
-                  </form>
-                </TabsContent>
-
-                <TabsContent value="signup">
-                  <form onSubmit={handleSignup} className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="signup-email">Email</Label>
-                      <Input
-                        id="signup-email"
-                        type="email"
-                        placeholder="your.email@example.com"
-                        value={signupData.email}
-                        onChange={(e) => setSignupData({ ...signupData, email: e.target.value })}
-                        required
-                        className="transition-all duration-300 focus:shadow-elegant"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="signup-password">Password</Label>
-                      <Input
-                        id="signup-password"
-                        type="password"
-                        placeholder="••••••••"
-                        value={signupData.password}
-                        onChange={(e) => setSignupData({ ...signupData, password: e.target.value })}
-                        required
-                        className="transition-all duration-300 focus:shadow-elegant"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="confirm-password">Confirm Password</Label>
-                      <Input
-                        id="confirm-password"
-                        type="password"
-                        placeholder="••••••••"
-                        value={signupData.confirmPassword}
-                        onChange={(e) => setSignupData({ ...signupData, confirmPassword: e.target.value })}
-                        required
-                        className="transition-all duration-300 focus:shadow-elegant"
-                      />
-                    </div>
-                    <Button type="submit" disabled={loading} className="w-full btn-hero pulse-glow mt-6">
-                      {loading ? 'Creating account...' : 'Start Your Journey'}
-                    </Button>
-                  </form>
-                </TabsContent>
-              </Tabs>
-            </CardContent>
-          </Card>
-
-          <div className="text-center mt-6 fade-in" style={{ animationDelay: '0.6s' }}>
-            <p className="text-sm text-muted-foreground">
-              New to dental practice financing?{' '}
-              <button 
-                onClick={() => navigate('/')} 
-                className="text-primary hover:text-primary-glow transition-colors underline"
-              >
-                Learn more about our solutions
-              </button>
-            </p>
+    <div className="min-h-screen bg-background flex items-center justify-center p-6">
+      <div className="w-full max-w-md">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-8">
+          <Button
+            variant="ghost"
+            onClick={() => navigate('/')}
+            className="flex items-center gap-2"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to Home
+          </Button>
+          <div className="flex items-center gap-2">
+            <img src={redefynnLogo} alt="Redefynn" className="h-6 w-auto" />
+            <span className="font-bold text-foreground">Redefynn</span>
           </div>
         </div>
+
+        {/* Welcome Card */}
+        <Card className="w-full">
+          <CardHeader className="text-center">
+            <CardTitle className="text-2xl font-bold">
+              {isForgotPassword ? 'Reset Password' : isSignUp ? 'Create Account' : 'Welcome Back'}
+            </CardTitle>
+            <CardDescription>
+              {isForgotPassword 
+                ? 'Enter your email to receive a password reset link'
+                : isSignUp 
+                ? 'Join Redefynn to access funding for your dental practice'
+                : 'Sign in to your Redefynn account'
+              }
+            </CardDescription>
+          </CardHeader>
+
+          <CardContent className="space-y-4">
+            <form onSubmit={isForgotPassword ? handleForgotPassword : isSignUp ? handleSignUp : handleSignIn} className="space-y-4">
+              {isSignUp && !isForgotPassword && (
+                <div className="space-y-2">
+                  <label htmlFor="fullName" className="text-sm font-medium">
+                    Full Name
+                  </label>
+                  <div className="relative">
+                    <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      id="fullName"
+                      name="fullName"
+                      type="text"
+                      placeholder="Dr. John Smith"
+                      value={formData.fullName}
+                      onChange={handleInputChange}
+                      className="pl-10"
+                      required={isSignUp}
+                    />
+                  </div>
+                </div>
+              )}
+
+              <div className="space-y-2">
+                <label htmlFor="email" className="text-sm font-medium">
+                  Email
+                </label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="your@email.com"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="pl-10"
+                    required
+                  />
+                </div>
+              </div>
+
+              {!isForgotPassword && (
+                <div className="space-y-2">
+                  <label htmlFor="password" className="text-sm font-medium">
+                    Password
+                  </label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      id="password"
+                      name="password"
+                      type="password"
+                      placeholder="••••••••"
+                      value={formData.password}
+                      onChange={handleInputChange}
+                      className="pl-10"
+                      required
+                    />
+                  </div>
+                </div>
+              )}
+
+              <Button
+                type="submit"
+                className="w-full"
+                disabled={isLoading}
+              >
+                {isLoading ? 'Loading...' : 
+                 isForgotPassword ? 'Send Reset Link' :
+                 isSignUp ? 'Create Account' : 'Sign In'}
+              </Button>
+            </form>
+
+            {/* Forgot Password Link for Sign In */}
+            {!isSignUp && !isForgotPassword && (
+              <div className="text-center">
+                <Button
+                  variant="link"
+                  onClick={() => setIsForgotPassword(true)}
+                  className="text-sm text-muted-foreground hover:text-primary"
+                >
+                  Forgot your password?
+                </Button>
+              </div>
+            )}
+
+            {/* Navigation Links */}
+            <div className="text-center">
+              {isForgotPassword ? (
+                <p className="text-sm text-muted-foreground">
+                  Remember your password?
+                  <Button
+                    variant="link"
+                    onClick={() => setIsForgotPassword(false)}
+                    className="p-0 ml-1 h-auto"
+                  >
+                    Back to Sign In
+                  </Button>
+                </p>
+              ) : (
+                <p className="text-sm text-muted-foreground">
+                  {isSignUp ? 'Already have an account?' : "Don't have an account?"}
+                  <Button
+                    variant="link"
+                    onClick={() => setIsSignUp(!isSignUp)}
+                    className="p-0 ml-1 h-auto"
+                  >
+                    {isSignUp ? 'Sign In' : 'Sign Up'}
+                  </Button>
+                </p>
+              )}
+            </div>
+          </CardContent>
+        </Card>
       </div>
-    </Layout>
+    </div>
   );
 };
 
