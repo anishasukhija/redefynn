@@ -1,12 +1,14 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle, DollarSign, Clock, Users, TrendingUp, Building, Briefcase } from "lucide-react";
+import { ArrowRight, CheckCircle, DollarSign, Clock, Users, TrendingUp, Building, Briefcase, LogOut, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 import redefynnLogo from "@/assets/Logo.jpeg";
 import dentalHero from "@/assets/dental-hero.jpg";
 
 const Index = () => {
   console.log("Index component is rendering");
   const navigate = useNavigate();
+  const { user, signOut, loading } = useAuth();
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -45,7 +47,20 @@ const Index = () => {
           </a>
         </nav>
         <div className="flex items-center gap-4">
-          <Button onClick={() => navigate('/welcome')}>Get Started</Button>
+          {user ? (
+            <>
+              <Button variant="outline" onClick={() => navigate('/dashboard')}>
+                <User className="h-4 w-4 mr-2" />
+                Dashboard
+              </Button>
+              <Button variant="ghost" onClick={signOut}>
+                <LogOut className="h-4 w-4 mr-2" />
+                Sign Out
+              </Button>
+            </>
+          ) : (
+            <Button onClick={() => navigate('/welcome')}>Get Started</Button>
+          )}
         </div>
       </header>      {/* Hero Section */}
       <main>
@@ -66,10 +81,17 @@ const Index = () => {
               Skip the banks, secure capital faster, and focus on what matters: your patients.
             </p>
             <div className="flex justify-center">
-              <Button size="lg" onClick={() => navigate('/welcome')} className="px-8 py-3">
-                Get Started
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              {user ? (
+                <Button size="lg" onClick={() => navigate('/dashboard')} className="px-8 py-3">
+                  Go to Dashboard
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              ) : (
+                <Button size="lg" onClick={() => navigate('/welcome')} className="px-8 py-3">
+                  Get Started
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              )}
             </div>
             <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-gray-300">
               <div className="flex items-center gap-2">
@@ -94,8 +116,8 @@ const Index = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
               <div className="space-y-3">
                 <Users className="h-12 w-12 text-primary mx-auto" />
-                <p className="text-4xl font-bold text-foreground">40+</p>
-                <p className="text-lg text-muted-foreground">Practitioners Registered</p>
+                <p className="text-4xl font-bold text-foreground">50+</p>
+                <p className="text-lg text-muted-foreground">Practitioners Funded</p>
               </div>
               <div className="space-y-3">
                 <Clock className="h-12 w-12 text-primary mx-auto" />

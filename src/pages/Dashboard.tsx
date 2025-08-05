@@ -13,10 +13,17 @@ import { useProfile } from '@/hooks/useProfile';
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { user, signOut } = useAuth();
+  const { user, signOut, loading: authLoading } = useAuth();
   const { isAdmin, loading: profileLoading } = useProfile();
   const { applications, loading: applicationsLoading, fetchApplications } = useApplications();
   const { stats, loading: statsLoading } = useApplicationStats();
+
+  // Redirect unauthenticated users to welcome page
+  React.useEffect(() => {
+    if (!authLoading && !user) {
+      navigate('/welcome');
+    }
+  }, [user, authLoading, navigate]);
 
   // Fetch applications based on admin status
   React.useEffect(() => {
@@ -60,7 +67,7 @@ const Dashboard = () => {
     }
   };
 
-  if (applicationsLoading || statsLoading || profileLoading) {
+  if (authLoading || applicationsLoading || statsLoading || profileLoading) {
     return (
       <Layout>
         <div className="min-h-screen flex items-center justify-center">
@@ -71,6 +78,11 @@ const Dashboard = () => {
         </div>
       </Layout>
     );
+  }
+
+  // Don't render dashboard if no user (will redirect via useEffect)
+  if (!user) {
+    return null;
   }
 
   return (
