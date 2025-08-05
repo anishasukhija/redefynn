@@ -94,8 +94,8 @@ const Index = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
               <div className="space-y-3">
                 <Users className="h-12 w-12 text-primary mx-auto" />
-                <p className="text-4xl font-bold text-foreground">50+</p>
-                <p className="text-lg text-muted-foreground">Practitioners Funded</p>
+                <p className="text-4xl font-bold text-foreground">40+</p>
+                <p className="text-lg text-muted-foreground">Practitioners Registered</p>
               </div>
               <div className="space-y-3">
                 <Clock className="h-12 w-12 text-primary mx-auto" />
