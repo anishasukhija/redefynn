@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle, DollarSign, Clock, Users, TrendingUp, Building, Briefcase, LogOut, User } from "lucide-react";
+import { ArrowRight, CheckCircle, DollarSign, Clock, Users, TrendingUp, Building, Briefcase, LogOut, User, Instagram, Linkedin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import redefynnLogo from "@/assets/Logo.jpeg";
@@ -199,6 +199,10 @@ const Index = () => {
           <div className="flex items-center gap-3">
             <img src={redefynnLogo} alt="Redefynn" className="h-7 w-auto" />
             <span className="font-semibold text-lg text-foreground">Redefynn</span>
+          </div>
+          <div className="flex justify-center items-center gap-0 mt-4">
+            <a href="https://www.linkedin.com/company/redefynn" target='_blank' rel="noopener noreferrer" className="text-primary hover:text-primary-goal transition-colors p-2 rounded-full hover:bg-primary/10" title="Connect with us on LinkedIn"><Linkedin className="h-6 w-6" /></a>
+            <a href="https://www.instagram.com/redefynn" target='_blank' rel="noopener noreferrer" className="text-primary hover:text-primary-goal transition-colors p-2 rounded-full hover:bg-primary/10" title="Follow us on Instagram"><Instagram className="h-6 w-6" /></a>
           </div>
           <div className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} Redefynn. All rights reserved.
