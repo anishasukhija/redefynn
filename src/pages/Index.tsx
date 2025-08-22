@@ -77,7 +77,7 @@ const Index = () => {
               </span>
             </h1>
             <p className="text-lg md:text-xl text-gray-100 max-w-2xl mx-auto">
-              Connect directly with investors who understand dental practice financing.
+              We fund People, not Credit Scores!
               Skip the banks, secure capital faster, and focus on what matters: your patients.
             </p>
             <div className="flex justify-center">
@@ -117,7 +117,7 @@ const Index = () => {
               <div className="space-y-3">
                 <Users className="h-12 w-12 text-primary mx-auto" />
                 <p className="text-4xl font-bold text-foreground">40+</p>
-                <p className="text-lg text-muted-foreground">Practitioners Registered</p>
+                <p className="text-lg text-muted-foreground">Dental Professionals Waitlisted</p>
               </div>
               <div className="space-y-3">
                 <Clock className="h-12 w-12 text-primary mx-auto" />
@@ -181,7 +181,7 @@ const Index = () => {
               Ready to Fund Your Practice's Growth?
             </h2>
             <p className="text-xl opacity-90 mt-4 max-w-2xl mx-auto">
-              Join hundreds of dental practices that have secured funding through our platform. Get started today.
+              Get started today.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Button size="lg" onClick={() => navigate('/welcome')} variant="secondary" className="px-8 py-3">

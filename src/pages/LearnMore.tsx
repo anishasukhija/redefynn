@@ -120,7 +120,7 @@ const LearnMore = () => {
                     Ready to Experience the Difference?
                   </h3>
                   <p className="text-muted-foreground mb-6">
-                    Join hundreds of dental professionals who've chosen a better way to finance their dreams.
+                    Get Started Today!
                   </p>
                   <Button 
                     onClick={() => navigate('/get-started')} 
