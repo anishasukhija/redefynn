@@ -16,6 +16,11 @@ export interface ApplicationData {
   address: string
   annual_income: string
   job_description: string
+  years_in_practice?: number
+  cd_courses?: string
+  preferred_location?: string
+  fund_request?: number
+  previous_loans?: string
   status?: string
   created_at?: string
   updated_at?: string
@@ -83,13 +88,33 @@ export const useApplications = () => {
         throw new Error(validation.errors.join(', '))
       }
 
-      // Sanitize text inputs
-      const sanitizedData = {
+      // Sanitize text inputs and include optional fields
+      const sanitizedData: any = {
         name: sanitizeInput(applicationData.name),
         age: applicationData.age,
         address: sanitizeInput(applicationData.address),
         annual_income: sanitizeInput(applicationData.annual_income),
         job_description: sanitizeInput(applicationData.job_description),
+      }
+
+      if (typeof applicationData.years_in_practice === 'number') {
+        sanitizedData.years_in_practice = applicationData.years_in_practice
+      }
+
+      if (applicationData.cd_courses && typeof applicationData.cd_courses === 'string') {
+        sanitizedData.cd_courses = sanitizeInput(applicationData.cd_courses)
+      }
+
+      if (applicationData.preferred_location && typeof applicationData.preferred_location === 'string') {
+        sanitizedData.preferred_location = sanitizeInput(applicationData.preferred_location)
+      }
+
+      if (typeof applicationData.fund_request === 'number') {
+        sanitizedData.fund_request = applicationData.fund_request
+      }
+
+      if (applicationData.previous_loans && typeof applicationData.previous_loans === 'string') {
+        sanitizedData.previous_loans = sanitizeInput(applicationData.previous_loans)
       }
 
       const { data, error } = await supabase

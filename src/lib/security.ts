@@ -148,6 +148,41 @@ export const validateApplicationData = (data: any): { isValid: boolean; errors: 
     errors.push('Job description too long')
   }
 
+  // Years in practice (optional but if provided must be a number >= 0)
+  if (data.years_in_practice !== undefined && data.years_in_practice !== null) {
+    if (typeof data.years_in_practice !== 'number' || data.years_in_practice < 0 || data.years_in_practice > 100) {
+      errors.push('Years in practice must be a valid number between 0 and 100')
+    }
+  }
+
+  // Fund request (optional number >= 0)
+  if (data.fund_request !== undefined && data.fund_request !== null) {
+    if (typeof data.fund_request !== 'number' || data.fund_request < 0) {
+      errors.push('Fund request must be a valid non-negative number')
+    }
+  }
+
+  // CD courses (optional string)
+  if (data.cd_courses !== undefined && data.cd_courses !== null) {
+    if (typeof data.cd_courses !== 'string' || data.cd_courses.trim().length > 1000) {
+      errors.push('CD courses field is invalid or too long')
+    }
+  }
+
+  // Preferred location (optional string)
+  if (data.preferred_location !== undefined && data.preferred_location !== null) {
+    if (typeof data.preferred_location !== 'string' || data.preferred_location.trim().length > 200) {
+      errors.push('Preferred location is invalid or too long')
+    }
+  }
+
+  // Previous loans (optional string)
+  if (data.previous_loans !== undefined && data.previous_loans !== null) {
+    if (typeof data.previous_loans !== 'string' || data.previous_loans.trim().length > 2000) {
+      errors.push('Previous loans field is invalid or too long')
+    }
+  }
+
   return { isValid: errors.length === 0, errors }
 }
 

@@ -19,7 +19,12 @@ const GetStarted = () => {
     age: '',
     address: '',
     annualIncome: '',
-    jobDescription: ''
+  jobDescription: '',
+  yearsInPractice: '',
+  cdCourses: '',
+  preferredLocation: '',
+  fundRequest: '',
+  previousLoans: ''
   });
 
   // Redirect if not logged in (but wait for auth to load)
@@ -37,6 +42,11 @@ const GetStarted = () => {
       address: formData.address,
       annual_income: formData.annualIncome,
       job_description: formData.jobDescription,
+  years_in_practice: formData.yearsInPractice ? parseInt(formData.yearsInPractice) : null,
+  cd_courses: formData.cdCourses,
+  preferred_location: formData.preferredLocation,
+  fund_request: formData.fundRequest ? parseFloat(formData.fundRequest) : null,
+  previous_loans: formData.previousLoans,
     });
 
     if (data) {
@@ -157,6 +167,30 @@ const GetStarted = () => {
                           className="mt-2 transition-all duration-300 focus:shadow-elegant"
                         />
                       </div>
+                    
+                      <div className="slide-in-right" style={{ animationDelay: '4.6s' }}>
+                        <Label htmlFor="yearsInPractice" className="text-base font-medium">Years in Practice *</Label>
+                        <Input
+                          id="yearsInPractice"
+                          type="number"
+                          placeholder="5"
+                          value={formData.yearsInPractice}
+                          onChange={(e) => handleInputChange('yearsInPractice', e.target.value)}
+                          min="0"
+                          className="mt-2 transition-all duration-300 focus:shadow-elegant"
+                        />
+                      </div>
+
+                      <div className="slide-in-right" style={{ animationDelay: '4.8s' }}>
+                        <Label htmlFor="preferredLocation" className="text-base font-medium">Preferred Location for Practice</Label>
+                        <Input
+                          id="preferredLocation"
+                          placeholder="City, State or region"
+                          value={formData.preferredLocation}
+                          onChange={(e) => handleInputChange('preferredLocation', e.target.value)}
+                          className="mt-2 transition-all duration-300 focus:shadow-elegant"
+                        />
+                      </div>
                     </div>
 
                     <div className="slide-in-right" style={{ animationDelay: '4.6s' }}>
@@ -184,6 +218,19 @@ const GetStarted = () => {
                     </div>
 
                     <div className="slide-in-right" style={{ animationDelay: '5s' }}>
+                      <Label htmlFor="fundRequest" className="text-base font-medium">Fund Request (how much)</Label>
+                      <Input
+                        id="fundRequest"
+                        type="number"
+                        placeholder="50000"
+                        value={formData.fundRequest}
+                        onChange={(e) => handleInputChange('fundRequest', e.target.value)}
+                        min="0"
+                        className="mt-2 transition-all duration-300 focus:shadow-elegant"
+                      />
+                    </div>
+
+                    <div className="slide-in-right" style={{ animationDelay: '5s' }}>
                       <Label htmlFor="jobDescription" className="text-base font-medium">
                         Job Description & Experience *
                       </Label>
@@ -194,6 +241,30 @@ const GetStarted = () => {
                         onChange={(e) => handleInputChange('jobDescription', e.target.value)}
                         required
                         rows={4}
+                        className="mt-2 transition-all duration-300 focus:shadow-elegant resize-none"
+                      />
+                    </div>
+
+                    <div className="slide-in-right" style={{ animationDelay: '5.2s' }}>
+                      <Label htmlFor="cdCourses" className="text-base font-medium">CD Courses Taken (if any)</Label>
+                      <Textarea
+                        id="cdCourses"
+                        placeholder="List continuing development / certification courses you've completed"
+                        value={formData.cdCourses}
+                        onChange={(e) => handleInputChange('cdCourses', e.target.value)}
+                        rows={3}
+                        className="mt-2 transition-all duration-300 focus:shadow-elegant resize-none"
+                      />
+                    </div>
+
+                    <div className="slide-in-right" style={{ animationDelay: '5.4s' }}>
+                      <Label htmlFor="previousLoans" className="text-base font-medium">Previous Active Loans (if any)</Label>
+                      <Textarea
+                        id="previousLoans"
+                        placeholder="Describe any active loans, lender, outstanding amount, monthly payment, etc."
+                        value={formData.previousLoans}
+                        onChange={(e) => handleInputChange('previousLoans', e.target.value)}
+                        rows={3}
                         className="mt-2 transition-all duration-300 focus:shadow-elegant resize-none"
                       />
                     </div>
